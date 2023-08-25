@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="People.MainPage" 
-             BackgroundColor="{DynamicResource Light}">
+             BackgroundColor="{DynamicResource Dark}">
 
     <Grid Padding="5" RowSpacing="1" ColumnSpacing="1">
 
@@ -18,16 +18,17 @@
         </Grid.ColumnDefinitions>
 
         <Entry x:Name="newPerson"
-           Placeholder="Ignresa el nombre " />
+           Placeholder="Ignresa el nombre "
+               HorizontalTextAlignment="Center"/>
 
-        <Button Text="Add Person"
+        <Button Text="Guardar Nombre"
             Grid.Row="1"
             Clicked="OnNewButtonClicked" />
 
         <Label x:Name="statusMessage"
            Grid.Row="2" />
 
-        <Button Text="Get All People"
+        <Button Text="Ver toda la lista"
             Grid.Row="3"
             Clicked="OnGetButtonClicked" />
 
