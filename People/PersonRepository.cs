@@ -15,15 +15,15 @@ namespace People
         public string StatusMessage { get; set; }
 
         // TODO: Add variable for the SQLite connection
-        private SQLiteConnection conn;
-        private void Init()
+        private SQLiteAsyncConnection conn;
+        private async Task Init()
         {
             // TODO: Add code to initialize the repository         
             if (conn != null)
                 return;
 
-            conn = new SQLiteConnection(_dbPath);
-            conn.CreateTable<Person>();
+            conn = new SQLiteAsyncConnection(_dbPath);
+            await conn.CreateTableAsync<Person>();
         }
 
         public PersonRepository(string dbPath)
