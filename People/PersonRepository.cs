@@ -31,42 +31,41 @@ namespace People
             _dbPath = dbPath;                        
         }
 
-        public void AddNewPerson(string name)
-        {            
+        public async Task AddNewPerson(string name)
+        {
             int result = 0;
             try
             {
-                // TODO: Call Init()
-                Init();
+                // Call Init()
+                await Init();
+
                 // basic validation to ensure a name was entered
                 if (string.IsNullOrEmpty(name))
                     throw new Exception("Valid name required");
 
-                // TODO: Insert the new person into the database
-                result = conn.Insert(new Person { Name = name });
+                result = await conn.InsertAsync(new Person { Name = name });
 
-                StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, name);
+                StatusMessage = string.Format("{0} record(s) added [Name: {1})", result, name);
             }
             catch (Exception ex)
             {
                 StatusMessage = string.Format("Failed to add {0}. Error: {1}", name, ex.Message);
             }
-
         }
 
-        public List<Person> GetAllPeople()
-        {
-            try
+            public async Task<List<Person>> GetAllPeople()
             {
-                Init();
-                return conn.Table<Person>().ToList();
-            }
-            catch (Exception ex)
-            {
-                StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
-            }
+               try
+               {
+                  await Init();
+                  return await conn.Table<Person>().ToListAsync();
+               }
+               catch (Exception ex)
+               {
+                  StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
+               }
 
-            return new List<Person>();
-        }
+               return new List<Person>();
+            }
     }
 }
