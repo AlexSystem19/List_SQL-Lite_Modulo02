@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
 
         <Entry x:Name="newPerson"
-           Placeholder="Ignresa el nombre "
+           Placeholder="Ingresa el nombre "
                HorizontalTextAlignment="Center"/>
 
         <Button Text="Guardar Nombre"
