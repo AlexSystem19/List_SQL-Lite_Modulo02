@@ -1,4 +1,7 @@
-﻿namespace People;
+﻿using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
+
+namespace People;
 
 public static class MauiProgram
 {
@@ -16,6 +19,10 @@ public static class MauiProgram
         // Add this code
         string dbPath = FileAccessHelper.GetLocalFilePath("people.db3");
         builder.Services.AddSingleton<PersonRepository>(s => ActivatorUtilities.CreateInstance<PersonRepository>(s, dbPath));
+
+#if ANDROID
+        builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
+#endif
 
         return builder.Build();
     }

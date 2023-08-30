@@ -28,7 +28,7 @@
         <Label x:Name="statusMessage"
            Grid.Row="2" />
 
-        <Button Text="Ver toda la lista"
+        <Button Text="Ver Log"
             Grid.Row="3"
             Clicked="OnGetButtonClicked" />
 

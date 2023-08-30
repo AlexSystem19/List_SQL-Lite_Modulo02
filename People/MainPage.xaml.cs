@@ -1,31 +1,42 @@
 ﻿using People.Models;
+using Plugin.Fingerprint.Abstractions;
 using System.Collections.Generic;
 
 namespace People;
 
-public partial class MainPage : ContentPage
-{
+        public partial class MainPage : ContentPage
+        {
+        #if ANDROID
+            private readonly IFingerprint fingerprint;
+        #endif
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+            public MainPage(
+        #if ANDROID
+                IFingerprint fingerprint
+        #endif
+                )
+            {
 
-  public async void OnNewButtonClicked(object sender, EventArgs args)
-  {
-     statusMessage.Text = "";
+                InitializeComponent();
 
-     await App.PersonRepo.AddNewPerson(newPerson.Text);
-     statusMessage.Text = App.PersonRepo.StatusMessage;
-  }
+                /*this.fingerprint = fingerprint;*/
+	        }
 
-  public async void OnGetButtonClicked(object sender, EventArgs args)
-  {
-     statusMessage.Text = "";
+          public async void OnNewButtonClicked(object sender, EventArgs args)
+          {
+             statusMessage.Text = "";
 
-     List<Person> people = await App.PersonRepo.GetAllPeople();
-     peopleList.ItemsSource = people;
-  }
+             await App.PersonRepo.AddNewPerson(newPerson.Text);
+             statusMessage.Text = App.PersonRepo.StatusMessage;
+          }
 
-}
+          public async void OnGetButtonClicked(object sender, EventArgs args)
+          {
+             statusMessage.Text = "";
+
+             List<Person> people = await App.PersonRepo.GetAllPeople();
+             peopleList.ItemsSource = people;
+          }
+
+        }
 
